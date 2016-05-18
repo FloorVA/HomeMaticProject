@@ -12,11 +12,36 @@ namespace projectHomeMatic
 {
     public partial class Form1 : Form
     {
+        private double setTemp;
+        private byte[] commandData = new byte[2];
+
         public Form1()
         {
             //test
             InitializeComponent();
             //test2
+        }
+
+        private void setTempBtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (setTempTxt.Text != "")
+                {
+                    setTemp = Convert.ToDouble(setTempTxt.Text);
+                }
+            }
+            catch (InvalidCastException ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+
+            SetTemperatureCommand stc = new SetTemperatureCommand(setTemp);
+            commandData = stc.GetCommandData();
+
+            cmdDataTxt.Text = commandData[0].ToString() + "; " + commandData[1].ToString();
+
+            tempToSetTxt.Text = ((double)commandData[1] / 2).ToString();
         }
     }
 }
