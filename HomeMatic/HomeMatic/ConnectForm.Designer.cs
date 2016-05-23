@@ -1,6 +1,6 @@
 ﻿namespace HomeMatic
 {
-    partial class ConnectFrom
+    partial class ConnectForm
     {
         /// <summary>
         /// Required designer variable.
