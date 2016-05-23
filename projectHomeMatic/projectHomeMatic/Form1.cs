@@ -32,6 +32,11 @@ namespace projectHomeMatic
                 {
                     setTemp = Convert.ToDouble(setTempTxt.Text);
                 }
+                else
+                {
+                    MessageBox.Show("Vul een geldige temperatuur in");
+                    return;
+                }
             }
             //Als er geen double van de tekst kan worden gemaakt wordt er een error weergegeven
             catch (InvalidCastException ex)
