@@ -62,24 +62,24 @@ namespace HomeMatic
         }
 
         /// <summary>
-        /// Button pressed for higher the temperature by 0.1
+        /// Button pressed for higher the temperature by 0.5
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnHigher_Click(object sender, EventArgs e)
         {
-            currentTemp += 0.1;
+            currentTemp += 0.5;
             updateLabel();
         }
 
         /// <summary>
-        /// Button pressed for lowerer the temperature by 0.1
+        /// Button pressed for lowerer the temperature by 0.5
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnLower_Click(object sender, EventArgs e)
         {
-            currentTemp -= 0.1;
+            currentTemp -= 0.5;
             updateLabel();
         }
 
