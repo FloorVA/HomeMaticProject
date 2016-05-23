@@ -17,9 +17,7 @@ namespace projectHomeMatic
 
         public Form1()
         {
-            //test
             InitializeComponent();
-            //test2
         }
 
         private void setTempBtn_Click(object sender, EventArgs e)
