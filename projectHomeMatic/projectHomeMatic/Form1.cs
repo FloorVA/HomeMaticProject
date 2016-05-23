@@ -39,7 +39,7 @@ namespace projectHomeMatic
             SetTemperatureCommand stc = new SetTemperatureCommand(setTemp);
             commandData = stc.GetCommandData();
 
-            cmdDataTxt.Text = commandData[0].ToString() + "; " + commandData[1].ToString();
+            cmdDataTxt.Text = commandData[0] + "; " + commandData[1];
 
             tempToSetTxt.Text = ((double)commandData[1] / 2).ToString();
         }
