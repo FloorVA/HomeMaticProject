@@ -13,6 +13,7 @@ namespace HomeMatic
     public partial class TempForm : Form
     {
         double currentTemp = 21.0;
+        private byte[] commandData = new byte[2];
 
         public TempForm()
         {
@@ -56,6 +57,7 @@ namespace HomeMatic
             {
                 currentTemp = Convert.ToDouble(txtTempChange.Text);
                 updateLabel();
+                SendData();
             }
         }
 
@@ -79,6 +81,14 @@ namespace HomeMatic
         {
             currentTemp -= 0.1;
             updateLabel();
+        }
+
+        private void SendData()
+        {
+            SetTemperatureCommand stc = new SetTemperatureCommand(currentTemp);
+            commandData = stc.GetCommandData();
+
+            MessageBox.Show("Command Data: " + commandData[0] + "; " + commandData[1]);
         }
     }
 }
