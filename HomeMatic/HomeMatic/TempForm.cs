@@ -106,6 +106,9 @@ namespace HomeMatic
             updateLabel();
         }
 
+        /// <summary>
+        /// Method that gets the commandData and then sends it to the device
+        /// </summary>
         private void SendData()
         {
             SetTemperatureCommand stc = new SetTemperatureCommand(currentTemp);
