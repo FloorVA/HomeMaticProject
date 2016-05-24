@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using InTheHand.Net.Sockets;
 using InTheHand.Net;
 using InTheHand.Net.Bluetooth;
+using System.Threading;
 
 namespace HomeMatic
 {
@@ -79,32 +80,59 @@ namespace HomeMatic
                     {
                         // connecting
                         localEndpoint = new BluetoothEndPoint(devices[i].DeviceAddress, BluetoothService.SerialPort);
-                        localClient = new BluetoothClient(localEndpoint);
+                        try
+                        {
+                            localClient = new BluetoothClient(localEndpoint);
+                        }
+                        catch (System.Net.Sockets.SocketException err)
+                        {
+                            Console.WriteLine(err);
+                        }
+
 
                         // pairing
-                        BluetoothDeviceInfo[] paired = localClient.DiscoverDevices(255, false, true, false, false);
+                        BluetoothDeviceInfo[] paired = null;
+                        try
+                        {
+                            paired = localClient.DiscoverDevices(255, false, true, false, false);
+                        }
+                        catch(NullReferenceException er)
+                        {
+                            Console.WriteLine(er);
+                        }
 
                         foreach (BluetoothDeviceInfo device in devices)
                         {
                             bool isPaired = false;
-                            for (int x = 0; x < paired.Length; x++)
+                            try
                             {
-                                if (device.Equals(paired[i]))
+                                for (int x = 0; x < paired.Length; x++)
                                 {
-                                    isPaired = true;
-                                    break;
+                                    if (device.Equals(paired[i]))
+                                    {
+                                        isPaired = true;
+                                        break;
+                                    }
                                 }
                             }
+                            catch(NullReferenceException y)
+                            {
+                                Console.WriteLine(y);
+                            }
+                            
 
                             // if the device is not paired, pair it!
                             if (!isPaired)
                             {
                                 // replace DEVICE_PIN here, synchronous method, but fast
                                 isPaired = BluetoothSecurity.PairRequest(device.DeviceAddress, DEVICE_PIN);
+                                Thread.Sleep(5000);
                                 if (isPaired)
                                 {
                                     // pairing completed
                                     MessageBox.Show("PAIRED");
+
+                                    BluetoothManager.setCurrentDevice(localEndpoint);
                                 }
                                 else
                                 {
@@ -113,8 +141,6 @@ namespace HomeMatic
                                 }
                             }
                         }
-
-                        BluetoothManager.setCurrentDevice(localEndpoint);
                     }
                 }
             }
