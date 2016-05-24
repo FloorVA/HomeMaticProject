@@ -60,6 +60,14 @@ namespace HomeMatic
                     if (txtTempChange.Text != "")
                     {
                         currentTemp = Convert.ToDouble(txtTempChange.Text);
+                        if (currentTemp < 5)
+                        {
+                            currentTemp = 5;
+                        }
+                        else if (currentTemp > 29.5)
+                        {
+                            currentTemp = 29.5;
+                        }
                         updateLabel();
                         SendData();
                     }
