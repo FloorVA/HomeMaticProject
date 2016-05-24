@@ -19,7 +19,7 @@ namespace HomeMatic
 
         private void btnConnect_Click(object sender, EventArgs e)
         {
-            ConnectFrom cfrm = new ConnectFrom();
+            ConnectForm cfrm = new ConnectForm();
             cfrm.Show();
             this.Hide();
         }

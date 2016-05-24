@@ -19,10 +19,14 @@ namespace HomeMatic
         public ConnectForm()
         {
             InitializeComponent();
+            searchBltDevices();
+        }
+
+        private void searchBltDevices()
+        {
             try
             {
                 bc = new BluetoothClient();
-                bcList = new List<BluetoothClient>();
                 try
                 {
                     devices = bc.DiscoverDevices(8);
@@ -36,10 +40,10 @@ namespace HomeMatic
             {
                 Console.WriteLine(e);
             }
-           
+
             lbFoundDevices.Items.Clear();
 
-            if(devices != null)
+            try
             {
                 for (int i = 0; i < devices.Length; i++)
                 {
@@ -48,7 +52,10 @@ namespace HomeMatic
                     lbFoundDevices.Items.Add("");
                 }
             }
-            
+            catch(NullReferenceException e)
+            {
+                Console.WriteLine(e);
+            }
             
         }
 
@@ -66,7 +73,7 @@ namespace HomeMatic
                 {
                     if(lbFoundDevices.SelectedItem == devices[i])
                     {
-                        BluetoothManager.setCurrentDevice(devices[i]);
+                       // BluetoothManager.setCurrentDevice(devices[i]);
                     }
                 }
             }

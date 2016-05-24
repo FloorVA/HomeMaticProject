@@ -50,11 +50,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConnectFrom.cs">
+    <Compile Include="ConnectForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ConnectFrom.Designer.cs">
-      <DependentUpon>ConnectFrom.cs</DependentUpon>
+    <Compile Include="ConnectForm.Designer.cs">
+      <DependentUpon>ConnectForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
@@ -78,8 +78,8 @@
     <Compile Include="TempForm.Designer.cs">
       <DependentUpon>TempForm.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="ConnectFrom.resx">
-      <DependentUpon>ConnectFrom.cs</DependentUpon>
+    <EmbeddedResource Include="ConnectForm.resx">
+      <DependentUpon>ConnectForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
