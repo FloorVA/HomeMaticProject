@@ -62,6 +62,7 @@ namespace HomeMatic
             {
                 Console.WriteLine(e);
             }
+            
         }
 
         /// <summary>
@@ -152,13 +153,10 @@ namespace HomeMatic
             //PinForm pinFrm = new PinForm();
             //pinFrm.Show();
         }
-<<<<<<< HEAD
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             searchBltDevices();
         }
-=======
->>>>>>> origin/master
     }
 }
