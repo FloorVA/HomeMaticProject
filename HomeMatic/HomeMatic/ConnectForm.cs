@@ -61,7 +61,6 @@ namespace HomeMatic
             {
                 Console.WriteLine(e);
             }
-            
         }
 
         /// <summary>
@@ -122,6 +121,5 @@ namespace HomeMatic
             //PinForm pinFrm = new PinForm();
             //pinFrm.Show();
         }
-        
     }
 }
