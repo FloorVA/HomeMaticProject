@@ -9,12 +9,13 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using InTheHand.Net.Sockets;
 using InTheHand.Net;
+using InTheHand.Net.Bluetooth;
 
 namespace HomeMatic
 {
     public partial class ConnectForm : Form
     {
-        // code is 2339 van bluetooth
+        private String DEVICE_PIN = "2339";
         BluetoothClient bc;
         BluetoothDeviceInfo[] devices;
         BluetoothEndPoint localEndpoint;
@@ -75,14 +76,52 @@ namespace HomeMatic
             {
                 for (int i = 0; i < devices.Length; i++)
                 {
-                    if(lbFoundDevices.SelectedItem == devices[i])
+                    if(lbFoundDevices.SelectedItem.Equals(devices[i].DeviceAddress))
                     {
+                        // connecting
+                        localEndpoint = new BluetoothEndPoint(devices[i].DeviceAddress, BluetoothService.SerialPort);
+                        localClient = new BluetoothClient(localEndpoint);
+
+                        // pairing
+                        BluetoothDeviceInfo[] paired = localClient.DiscoverDevices(255, false, true, false, false);
+
+                        foreach (BluetoothDeviceInfo device in devices)
+                        {
+                            bool isPaired = false;
+                            for (int x = 0; x < paired.Length; x++)
+                            {
+                                if (device.Equals(paired[i]))
+                                {
+                                    isPaired = true;
+                                    break;
+                                }
+                            }
+
+                            // if the device is not paired, pair it!
+                            if (!isPaired)
+                            {
+                                // replace DEVICE_PIN here, synchronous method, but fast
+                                isPaired = BluetoothSecurity.PairRequest(device.DeviceAddress, DEVICE_PIN);
+                                if (isPaired)
+                                {
+                                    // pairing completed
+                                    MessageBox.Show("PAIRED");
+                                }
+                                else
+                                {
+                                    // pairing failed
+                                    MessageBox.Show("PAIRING FAILED");
+                                }
+                            }
+                        }
+
                         BluetoothManager.setCurrentDevice(localEndpoint);
                     }
                 }
             }
-            PinForm pinFrm = new PinForm();
-            pinFrm.Show();
+            //PinForm pinFrm = new PinForm();
+            //pinFrm.Show();
         }
+        
     }
 }
