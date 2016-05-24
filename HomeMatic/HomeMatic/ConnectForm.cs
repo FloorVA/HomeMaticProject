@@ -77,7 +77,7 @@ namespace HomeMatic
             {
                 for (int i = 0; i < devices.Length; i++)
                 {
-                    if(lbFoundDevices.SelectedItem.Equals(devices[i].DeviceAddress))
+                    if(devices[i].DeviceAddress != null && lbFoundDevices.SelectedItem.Equals(devices[i].DeviceAddress))
                     {
                         // connecting
                         localEndpoint = new BluetoothEndPoint(devices[i].DeviceAddress, BluetoothService.SerialPort);
@@ -127,7 +127,12 @@ namespace HomeMatic
                             {
                                 // replace DEVICE_PIN here, synchronous method, but fast
                                 isPaired = BluetoothSecurity.PairRequest(device.DeviceAddress, DEVICE_PIN);
-                                Thread.Sleep(5000);
+                                Thread pair = new Thread(() => BluetoothSecurity.PairRequest(device.DeviceAddress, DEVICE_PIN));
+                                pair.Start();
+
+                                // wait till pair is done
+                                while (pair.IsAlive) ;
+                                
                                 if (isPaired)
                                 {
                                     // pairing completed
@@ -148,6 +153,10 @@ namespace HomeMatic
             //PinForm pinFrm = new PinForm();
             //pinFrm.Show();
         }
-        
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            searchBltDevices();
+        }
     }
 }
