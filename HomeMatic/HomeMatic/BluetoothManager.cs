@@ -11,7 +11,7 @@ namespace HomeMatic
 {
     static class BluetoothManager
     {
-        private static BluetoothClient currentDevice;
+        private static BluetoothEndPoint currentDevice;
         
         /// <summary>
         /// Method to send data to the device the program is currently connected to
@@ -21,12 +21,12 @@ namespace HomeMatic
             //currentDevice.GetStream().Write();
         }
 
-        public static void setCurrentDevice(BluetoothClient bltClient)
+        public static void setCurrentDevice(BluetoothEndPoint bltEndPoint)
         {
-            currentDevice = bltClient;
+            currentDevice = bltEndPoint;
         }
 
-        public static BluetoothClient getCurrentDevice()
+        public static BluetoothEndPoint getCurrentDevice()
         {
             return currentDevice;
         }

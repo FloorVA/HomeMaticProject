@@ -8,13 +8,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using InTheHand.Net.Sockets;
+using InTheHand.Net;
 
 namespace HomeMatic
 {
     public partial class ConnectForm : Form
     {
+        // code is 2339 van bluetooth
         BluetoothClient bc;
         BluetoothDeviceInfo[] devices;
+        BluetoothEndPoint localEndpoint;
+        BluetoothClient localClient;
 
         public ConnectForm()
         {
@@ -73,7 +77,7 @@ namespace HomeMatic
                 {
                     if(lbFoundDevices.SelectedItem == devices[i])
                     {
-                       // BluetoothManager.setCurrentDevice(devices[i]);
+                        BluetoothManager.setCurrentDevice(localEndpoint);
                     }
                 }
             }
