@@ -77,7 +77,7 @@ namespace HomeMatic
                         SendData();
                     }
                 }
-                catch (FormatException ex)
+                catch (FormatException)
                 {
                     MessageBox.Show("Please enter a valid temperature");
                 }
