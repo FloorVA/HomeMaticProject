@@ -53,11 +53,26 @@ namespace HomeMatic
         {
             // Key value of the Enter key is 13
             // check if enter is pressed to confirm
-            if(e.KeyValue == 13)
+            if (e.KeyValue == 13)
             {
-                currentTemp = Convert.ToDouble(txtTempChange.Text);
-                updateLabel();
-                SendData();
+                try
+                {
+                    if (txtTempChange.Text != "")
+                    {
+                        currentTemp = Convert.ToDouble(txtTempChange.Text);
+                        updateLabel();
+                        SendData();
+                    }
+                    else
+                    {
+                        updateLabel();
+                        SendData();
+                    }
+                }
+                catch (FormatException ex)
+                {
+                    MessageBox.Show("Please enter a valid temperature");
+                }
             }
         }
 
