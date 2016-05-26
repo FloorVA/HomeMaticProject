@@ -116,5 +116,13 @@ namespace HomeMatic
 
             MessageBox.Show("Command Data: " + commandData[0] + "; " + commandData[1]);
         }
+
+        private void getInfoBtn_Click(object sender, EventArgs e)
+        {
+            SystemInformationRequestCommand sirc = new SystemInformationRequestCommand();
+            commandData = sirc.GetCommandData();
+
+            MessageBox.Show("Command Data: " + commandData[0]);
+        }
     }
 }
