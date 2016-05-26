@@ -31,6 +31,7 @@
             this.lbFoundDevices = new System.Windows.Forms.ListBox();
             this.btnConfirm = new System.Windows.Forms.Button();
             this.lblInfo = new System.Windows.Forms.Label();
+            this.btnRefresh = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lbFoundDevices
@@ -61,15 +62,26 @@
             this.lblInfo.TabIndex = 2;
             this.lblInfo.Text = "Select your device from the list and press OK";
             // 
-            // ConnectFrom
+            // btnRefresh
+            // 
+            this.btnRefresh.Location = new System.Drawing.Point(50, 352);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(43, 40);
+            this.btnRefresh.TabIndex = 3;
+            this.btnRefresh.Text = "⟳";
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
+            // ConnectForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(396, 438);
+            this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.lblInfo);
             this.Controls.Add(this.btnConfirm);
             this.Controls.Add(this.lbFoundDevices);
-            this.Name = "ConnectFrom";
+            this.Name = "ConnectForm";
             this.Text = "ConnectFrom";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -81,5 +93,6 @@
         private System.Windows.Forms.ListBox lbFoundDevices;
         private System.Windows.Forms.Button btnConfirm;
         private System.Windows.Forms.Label lblInfo;
+        private System.Windows.Forms.Button btnRefresh;
     }
 }
