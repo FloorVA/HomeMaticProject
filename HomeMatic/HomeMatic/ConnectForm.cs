@@ -16,6 +16,8 @@ namespace HomeMatic
 {
     public partial class ConnectForm : Form
     {
+        //   00-1a-22 is het begin van het MAC adres
+
         private String DEVICE_PIN = "2339";
         BluetoothClient bc;
         BluetoothDeviceInfo[] devices;
@@ -35,7 +37,7 @@ namespace HomeMatic
                 bc = new BluetoothClient();
                 try
                 {
-                    devices = bc.DiscoverDevices(8);
+                    devices = bc.DiscoverDevices();
                 }
                 catch (NullReferenceException e)
                 {
@@ -48,15 +50,26 @@ namespace HomeMatic
             }
 
             lbFoundDevices.Items.Clear();
-
+            
             try
             {
                 for (int i = 0; i < devices.Length; i++)
                 {
+                    while (!devices[i].DeviceAddress.ToString().Take(8).ToArray().Equals("00-1a-22"))
+                    {
+                        bc.DiscoverDevices();
+                    }
+
                     lbFoundDevices.Items.Add(devices[i].DeviceName);
                     lbFoundDevices.Items.Add(devices[i].DeviceAddress);
                     lbFoundDevices.Items.Add("");
                 }
+                /*for (int i = 0; i < devices.Length; i++)
+                {
+                    lbFoundDevices.Items.Add(devices[i].DeviceName);
+                    lbFoundDevices.Items.Add(devices[i].DeviceAddress);
+                    lbFoundDevices.Items.Add("");
+                }*/
             }
             catch(NullReferenceException e)
             {
