@@ -117,6 +117,12 @@ namespace HomeMatic
             MessageBox.Show("Command Data: " + commandData[0] + "; " + commandData[1]);
         }
 
+        /// <summary>
+        /// Method that is called when the Get Information button is pressed. This method will send a request to
+        /// get the current information for the thermostat
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void getInfoBtn_Click(object sender, EventArgs e)
         {
             SystemInformationRequestCommand sirc = new SystemInformationRequestCommand();
