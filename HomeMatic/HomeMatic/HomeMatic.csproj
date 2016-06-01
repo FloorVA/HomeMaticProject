@@ -35,7 +35,7 @@
   <ItemGroup>
     <Reference Include="InTheHand.Net.Personal, Version=3.5.605.0, Culture=neutral, PublicKeyToken=ea38caa273134499, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Documents\Visual Studio 2015\Libraries\32feet.NET\NET\InTheHand.Net.Personal.dll</HintPath>
+      <HintPath>..\..\..\..\Dropbox\INF2H (1)\32feet.NET\NET\InTheHand.Net.Personal.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

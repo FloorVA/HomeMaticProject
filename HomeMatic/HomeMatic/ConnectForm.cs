@@ -16,8 +16,12 @@ namespace HomeMatic
 {
     public partial class ConnectForm : Form
     {
-        //   00-1a-22 is het begin van het MAC adres
-
+        /*   MAC addresses
+         *   00-1A-22   => EQ-3
+         *   00-1B-D6   => ELV
+         *   48-D8-55   => ELV
+         *   90-99-16   => ELV
+         */
         private String DEVICE_PIN = "2339";
         BluetoothClient bc;
         BluetoothDeviceInfo[] devices;
@@ -50,37 +54,44 @@ namespace HomeMatic
             }
 
             lbFoundDevices.Items.Clear();
-            
+
             try
             {
+                Boolean found = false;
+                /*while (!found)
+                {
+                    devices = bc.DiscoverDevices();
+                    for (int i = 0; i < devices.Length; i++)
+                    {
+                        //char[] tempChar = devices[i].DeviceName.ToString().Take(8).ToArray();
+                        String tempStr = devices[i].DeviceName;
+
+                        if (tempStr.Equals("CC-RT-BLE"))
+                        {
+                            found = true;
+                            MessageBox.Show("FOUND!");
+                        }
+                    }
+                    MessageBox.Show("AGAIN");
+                }*/
                 for (int i = 0; i < devices.Length; i++)
                 {
-                    while (!devices[i].DeviceAddress.ToString().Take(8).ToArray().Equals("00-1a-22"))
-                    {
-                        bc.DiscoverDevices();
-                    }
-
                     lbFoundDevices.Items.Add(devices[i].DeviceName);
                     lbFoundDevices.Items.Add(devices[i].DeviceAddress);
                     lbFoundDevices.Items.Add("");
                 }
-                /*for (int i = 0; i < devices.Length; i++)
-                {
-                    lbFoundDevices.Items.Add(devices[i].DeviceName);
-                    lbFoundDevices.Items.Add(devices[i].DeviceAddress);
-                    lbFoundDevices.Items.Add("");
-                }*/
             }
-            catch(NullReferenceException e)
+            catch (NullReferenceException e)
             {
                 Console.WriteLine(e);
             }
-            
+
         }
 
         /// <summary>
         /// Confirmed the bluetooth device
         /// New form opens to enter the PIN for the thermostat
+        /// Made use of this source: http://stackoverflow.com/questions/16802791/pair-bluetooth-devices-to-a-computer-with-32feet-net-bluetooth-library
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -97,6 +108,7 @@ namespace HomeMatic
                         try
                         {
                             localClient = new BluetoothClient(localEndpoint);
+                            localClient.Connect(localEndpoint);
                         }
                         catch (System.Net.Sockets.SocketException err)
                         {
@@ -149,14 +161,12 @@ namespace HomeMatic
                                 if (isPaired)
                                 {
                                     // pairing completed
-                                    MessageBox.Show("PAIRED");
-
-                                    BluetoothManager.setCurrentDevice(localEndpoint);
+                                    BluetoothManager.setCurrentDevice(localClient);
+                                    BluetoothManager.setEndPoint(localEndpoint);
                                 }
                                 else
                                 {
                                     // pairing failed
-                                    MessageBox.Show("PAIRING FAILED");
                                 }
                             }
                         }
@@ -170,6 +180,7 @@ namespace HomeMatic
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             searchBltDevices();
+            //Thread search = new Thread(() => searchBltDevices());
         }
     }
 }
