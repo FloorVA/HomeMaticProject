@@ -72,6 +72,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SetTemperatureCommand.cs" />
+    <Compile Include="SystemInformationRequestCommand.cs" />
     <Compile Include="TempForm.cs">
       <SubType>Form</SubType>
     </Compile>
