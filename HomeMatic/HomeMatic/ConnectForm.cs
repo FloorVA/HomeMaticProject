@@ -120,7 +120,7 @@ namespace HomeMatic
                         BluetoothDeviceInfo[] paired = null;
                         try
                         {
-                            paired = localClient.DiscoverDevices(255, false, true, false, false);
+                            paired = localClient.DiscoverDevices(255, default(Boolean), default(Boolean), true, false);
                         }
                         catch(NullReferenceException er)
                         {

@@ -47,7 +47,10 @@ namespace HomeMatic
         public static void sendData(String command)
         {
             byte[] commandData = new byte[2];
+            // 65 is SetTemperature command (see command summary above)
             commandData[0] = 65;
+
+            // convert double to byte to send it over bluetooth
             commandData[1] = (byte)(int)(Convert.ToDouble(command) * 2.0D);
             if (bltStream != null)
             {

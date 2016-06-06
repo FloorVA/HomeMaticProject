@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -23,6 +24,34 @@ namespace HomeMatic
             lblCurrentTemp.Font = new Font("Microsoft Sans Serif", 20);
             lblCurrentTemp.TextAlign = ContentAlignment.MiddleCenter;
             Dock = DockStyle.Fill;
+
+            Thread rand = new Thread(new ThreadStart(test));
+            rand.Start();
+        }
+
+        public void test()
+        {
+            while(true)
+            {
+                Random rand = new Random();
+                if (rand.Next(1) == 1)
+                {
+                    currentTemp += 0.5;
+                }
+                else
+                {
+                    currentTemp -= 0.5;
+                }
+                Thread.Sleep(1000);
+                try
+                {
+                    lblCurrentTemp.Text = currentTemp.ToString();
+                }
+                catch(InvalidOperationException e)
+                {
+                    Console.WriteLine(e);
+                }
+            }
         }
 
         /// <summary>
