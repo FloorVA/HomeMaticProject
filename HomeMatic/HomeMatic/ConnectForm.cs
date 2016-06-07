@@ -21,7 +21,11 @@ namespace HomeMatic
          *   00-1B-D6   => ELV
          *   48-D8-55   => ELV
          *   90-99-16   => ELV
+         *   
+         *   found in properties of CC-RT-BLE: BTHLE\DEV_001A2207B4A1\8&207BDF08&0&001A2207B4A1
+         *   001A2207B4A1 == MAC-address of the Thermostat
          */
+
         private String DEVICE_PIN = "2339";
         BluetoothClient bc;
         BluetoothDeviceInfo[] devices;
@@ -34,6 +38,9 @@ namespace HomeMatic
             searchBltDevices();
         }
 
+        /// <summary>
+        /// Scan for devices in the area
+        /// </summary>
         private void searchBltDevices()
         {
             try
@@ -58,7 +65,7 @@ namespace HomeMatic
             try
             {
                 Boolean found = false;
-                /*while (!found)
+                while (!found)
                 {
                     devices = bc.DiscoverDevices();
                     for (int i = 0; i < devices.Length; i++)
@@ -66,14 +73,14 @@ namespace HomeMatic
                         //char[] tempChar = devices[i].DeviceName.ToString().Take(8).ToArray();
                         String tempStr = devices[i].DeviceName;
 
-                        if (tempStr.Equals("CC-RT-BLE"))
+                        if (tempStr.Equals("CC-RT-BLE") || tempStr.Equals("001A2207B4A1"))
                         {
                             found = true;
                             MessageBox.Show("FOUND!");
                         }
                     }
                     MessageBox.Show("AGAIN");
-                }*/
+                }
                 for (int i = 0; i < devices.Length; i++)
                 {
                     lbFoundDevices.Items.Add(devices[i].DeviceName);
@@ -91,7 +98,7 @@ namespace HomeMatic
         /// <summary>
         /// Confirmed the bluetooth device
         /// New form opens to enter the PIN for the thermostat
-        /// Made use of this source: http://stackoverflow.com/questions/16802791/pair-bluetooth-devices-to-a-computer-with-32feet-net-bluetooth-library
+        /// Based on: http://stackoverflow.com/questions/16802791/pair-bluetooth-devices-to-a-computer-with-32feet-net-bluetooth-library
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -154,7 +161,6 @@ namespace HomeMatic
                                 isPaired = BluetoothSecurity.PairRequest(device.DeviceAddress, DEVICE_PIN);
                                 Thread pair = new Thread(() => BluetoothSecurity.PairRequest(device.DeviceAddress, DEVICE_PIN));
                                 pair.Start();
-
                                 // wait till pair is done
                                 while (pair.IsAlive) ;
                                 

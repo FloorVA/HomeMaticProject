@@ -10,6 +10,9 @@ using System.IO;
 
 namespace HomeMatic
 {
+    /// <summary>
+    /// Bluetooth manager is static class so it can be accessed at all times. 
+    /// </summary>
     static class BluetoothManager
     {
         private static BluetoothEndPoint currentEndPoint;
@@ -58,22 +61,39 @@ namespace HomeMatic
             }
         }
 
+        /// <summary>
+        /// When a new connection is set up, the device that will be connected to will be set to the current device in the manager. 
+        /// A new stream will be set up to the new bluetooth device.
+        /// </summary>
+        /// <param name="bltDevice"></param>
         public static void setCurrentDevice(BluetoothClient bltDevice)
         {
             currentDevice = bltDevice;
             bltStream = currentDevice.GetStream();
         }
 
+        /// <summary>
+        /// Returns the device the program is connected to
+        /// </summary>
+        /// <returns>currentDevice</returns>
         public static BluetoothClient getCurrentDevice()
         {
             return currentDevice;
         }
 
+        /// <summary>
+        /// Sets a new endpoint when a new connection is initialized
+        /// </summary>
+        /// <param name="newEndPoint"></param>
         public static void setEndPoint(BluetoothEndPoint newEndPoint)
         {
             currentEndPoint = newEndPoint;
         }
 
+        /// <summary>
+        /// return the current endpoint
+        /// </summary>
+        /// <returns>currentEndPoint</returns>
         public static BluetoothEndPoint getEndPoint()
         {
             return currentEndPoint;
