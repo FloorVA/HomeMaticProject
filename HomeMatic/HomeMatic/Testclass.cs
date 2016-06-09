@@ -8,6 +8,7 @@ namespace HomeMatic
 {
     class Testclass
     {
+        /*
         async void Initialize()
         {
             Windows.Devices.Bluetooth.RfcommDeviceService _service;
@@ -97,6 +98,6 @@ namespace HomeMatic
                 uint version = reader.Uint32();
                 return version >= MINIMUM_SERVICE_VERSION;
             }
-        }
+        }*/
     }
 }

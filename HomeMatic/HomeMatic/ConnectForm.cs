@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using InTheHand.Net.Sockets;
 using InTheHand.Net;
 using InTheHand.Net.Bluetooth;
+using InTheHand.Net.Bluetooth.Factory;
 using System.Threading;
 
 namespace HomeMatic
@@ -65,7 +66,7 @@ namespace HomeMatic
             try
             {
                 Boolean found = false;
-                while (!found)
+                /*while (!found)
                 {
                     devices = bc.DiscoverDevices();
                     for (int i = 0; i < devices.Length; i++)
@@ -79,8 +80,8 @@ namespace HomeMatic
                             MessageBox.Show("FOUND!");
                         }
                     }
-                    MessageBox.Show("AGAIN");
-                }
+                    //MessageBox.Show("AGAIN");
+                }*/
                 for (int i = 0; i < devices.Length; i++)
                 {
                     lbFoundDevices.Items.Add(devices[i].DeviceName);
