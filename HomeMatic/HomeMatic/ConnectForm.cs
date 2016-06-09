@@ -77,10 +77,9 @@ namespace HomeMatic
                         if (tempStr.Equals("CC-RT-BLE") || tempStr.Equals("001A2207B4A1"))
                         {
                             found = true;
-                            MessageBox.Show("FOUND!");
+                            MessageBox.Show("Found CC-RT-BLE");
                         }
                     }
-                    //MessageBox.Show("AGAIN");
                 }*/
                 for (int i = 0; i < devices.Length; i++)
                 {
