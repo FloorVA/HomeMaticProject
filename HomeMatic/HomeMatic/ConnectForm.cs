@@ -32,10 +32,13 @@ namespace HomeMatic
         BluetoothDeviceInfo[] devices;
         BluetoothEndPoint localEndpoint;
         BluetoothClient localClient;
+        private Main main;
 
-        public ConnectForm()
+        public ConnectForm(Main main)
         {
             InitializeComponent();
+
+            this.main = main;
             searchBltDevices();
         }
 
@@ -65,8 +68,12 @@ namespace HomeMatic
 
             try
             {
+                /*
+                 * While loop to show a messagebox when found a specific device.
+                 * Mainly used for testing how to find a particular device.
+                
                 Boolean found = false;
-                /*while (!found)
+                while (!found)
                 {
                     devices = bc.DiscoverDevices();
                     for (int i = 0; i < devices.Length; i++)
@@ -77,10 +84,12 @@ namespace HomeMatic
                         if (tempStr.Equals("CC-RT-BLE") || tempStr.Equals("001A2207B4A1"))
                         {
                             found = true;
-                            MessageBox.Show("Found CC-RT-BLE");
+                            MessageBox.Show("Found " + devices[i].DeviceName);
                         }
                     }
                 }*/
+
+                // add het found name and MAC-addresses of the bluetoothdevices to a listbox
                 for (int i = 0; i < devices.Length; i++)
                 {
                     lbFoundDevices.Items.Add(devices[i].DeviceName);
@@ -90,7 +99,7 @@ namespace HomeMatic
             }
             catch (NullReferenceException e)
             {
-                Console.WriteLine(e);
+                Console.WriteLine("ERROR searching devices: " + e);
             }
 
         }
@@ -100,17 +109,16 @@ namespace HomeMatic
         /// New form opens to enter the PIN for the thermostat
         /// Based on: http://stackoverflow.com/questions/16802791/pair-bluetooth-devices-to-a-computer-with-32feet-net-bluetooth-library
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnConfirm_Click(object sender, EventArgs e)
         {
+            // check if there even are bluetooth devices detectable 
             if (devices != null)
             {
                 for (int i = 0; i < devices.Length; i++)
                 {
-                    if(devices[i].DeviceAddress != null && lbFoundDevices.SelectedItem.Equals(devices[i].DeviceAddress))
+                    if(devices[i].DeviceAddress != null && lbFoundDevices.SelectedItem != null && lbFoundDevices.SelectedItem.Equals(devices[i].DeviceAddress))
                     {
-                        // connecting
+                        // connecting to the selected device
                         localEndpoint = new BluetoothEndPoint(devices[i].DeviceAddress, BluetoothService.SerialPort);
                         try
                         {
@@ -134,6 +142,7 @@ namespace HomeMatic
                             Console.WriteLine(er);
                         }
 
+                        // check if a device is already paired
                         foreach (BluetoothDeviceInfo device in devices)
                         {
                             bool isPaired = false;
@@ -179,14 +188,21 @@ namespace HomeMatic
                     }
                 }
             }
-            //PinForm pinFrm = new PinForm();
-            //pinFrm.Show();
         }
 
+        /// <summary>
+        /// When the refresh button is pressed, it should look for new devices.
+        /// </summary>
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             searchBltDevices();
-            //Thread search = new Thread(() => searchBltDevices());
+        }
+
+        private void btn_back_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            Main main = new Main();
+            main.Show();
         }
     }
 }

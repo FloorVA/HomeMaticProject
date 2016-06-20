@@ -10,6 +10,9 @@ using System.Windows.Forms;
 
 namespace HomeMatic
 {
+    /// <summary>
+    /// The Main menu. From here the user can navigate to the ConnectForm and TempForm
+    /// </summary>
     public partial class Main : Form
     {
         public Main()
@@ -17,16 +20,22 @@ namespace HomeMatic
             InitializeComponent();
         }
 
+        /// <summary>
+        /// if btnConnect is clicked, the ConnectForm opens and Main (this) hides.
+        /// </summary>
         private void btnConnect_Click(object sender, EventArgs e)
         {
-            ConnectForm cfrm = new ConnectForm();
+            ConnectForm cfrm = new ConnectForm(this);
             cfrm.Show();
             this.Hide();
         }
 
+        /// <summary>
+        /// if btnTempSettings is clicked, the TempForm opens and Main (this) hides.
+        /// </summary>
         private void btnTempSettings_Click(object sender, EventArgs e)
         {
-            TempForm tmpfrm = new TempForm();
+            TempForm tmpfrm = new TempForm(this);
             tmpfrm.Show();
             this.Hide();
         }

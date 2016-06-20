@@ -15,8 +15,9 @@ namespace HomeMatic
     {
         double currentTemp = 21.0;
         private byte[] commandData = new byte[2];
+        private Main main;
 
-        public TempForm()
+        public TempForm(Main main)
         {
             InitializeComponent();
 
@@ -25,33 +26,7 @@ namespace HomeMatic
             lblCurrentTemp.TextAlign = ContentAlignment.MiddleCenter;
             Dock = DockStyle.Fill;
 
-            Thread rand = new Thread(new ThreadStart(test));
-            rand.Start();
-        }
-
-        public void test()
-        {
-            while(true)
-            {
-                Random rand = new Random();
-                if (rand.Next(1) == 1)
-                {
-                    currentTemp += 0.5;
-                }
-                else
-                {
-                    currentTemp -= 0.5;
-                }
-                Thread.Sleep(1000);
-                try
-                {
-                    lblCurrentTemp.Text = currentTemp.ToString();
-                }
-                catch(InvalidOperationException e)
-                {
-                    Console.WriteLine(e);
-                }
-            }
+            this.main = main;
         }
 
         /// <summary>
@@ -61,23 +36,12 @@ namespace HomeMatic
         private void updateLabel()
         {
             lblCurrentTemp.Text = currentTemp.ToString();
-            bltSend();
-        }
-
-        /// <summary>
-        /// Sends signal via bluetooth
-        /// </summary>
-        private void bltSend()
-        {
-            // TODO:
-            // Send data to the thermostat
+            bltSend(currentTemp);
         }
 
         /// <summary>
         /// User input for temperature from textbox
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void txtTempChange_KeyDown(object sender, KeyEventArgs e)
         {
             // Key value of the Enter key is 13
@@ -86,6 +50,7 @@ namespace HomeMatic
             {
                 try
                 {
+                    // input check
                     if (txtTempChange.Text != "")
                     {
                         currentTemp = Convert.ToDouble(txtTempChange.Text);
@@ -97,13 +62,12 @@ namespace HomeMatic
                         {
                             currentTemp = 29.5;
                         }
+                        bltSend(currentTemp);
                         updateLabel();
-                        SendData();
                     }
                     else
                     {
-                        updateLabel();
-                        SendData();
+                        MessageBox.Show("Please enter a valid temperature");
                     }
                 }
                 catch (FormatException)
@@ -116,8 +80,6 @@ namespace HomeMatic
         /// <summary>
         /// Button pressed for higher the temperature by 0.5
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnHigher_Click(object sender, EventArgs e)
         {
             currentTemp += 0.5;
@@ -127,8 +89,6 @@ namespace HomeMatic
         /// <summary>
         /// Button pressed for lowerer the temperature by 0.5
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnLower_Click(object sender, EventArgs e)
         {
             currentTemp -= 0.5;
@@ -138,26 +98,26 @@ namespace HomeMatic
         /// <summary>
         /// Method that gets the commandData and then sends it to the device
         /// </summary>
-        private void SendData()
+        private void bltSend(double newTmp)
         {
-            SetTemperatureCommand stc = new SetTemperatureCommand(currentTemp);
-            commandData = stc.GetCommandData();
-
-            MessageBox.Show("Command Data: " + commandData[0] + "; " + commandData[1]);
+            BluetoothManager.sendData(newTmp.ToString());
+        }
+        /// <summary>
+        ///  should get temperature but can not be tested or implemented because the connection between the thermostat cant be initialized.
+        /// </summary>
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            // currentTemp = BluetoothManager.getTemperature(); 
+            updateLabel();
         }
 
         /// <summary>
-        /// Method that is called when the Get Information button is pressed. This method will send a request to
-        /// get the current information for the thermostat
+        /// Go to Main menu and close this form
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void getInfoBtn_Click(object sender, EventArgs e)
+        private void btn_back_Click(object sender, EventArgs e)
         {
-            SystemInformationRequestCommand sirc = new SystemInformationRequestCommand();
-            commandData = sirc.GetCommandData();
-
-            MessageBox.Show("Command Data: " + commandData[0]);
+            this.Hide();
+            main.Show();
         }
     }
 }

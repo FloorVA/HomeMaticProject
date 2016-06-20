@@ -32,6 +32,7 @@
             this.btnConfirm = new System.Windows.Forms.Button();
             this.lblInfo = new System.Windows.Forms.Label();
             this.btnRefresh = new System.Windows.Forms.Button();
+            this.btn_back = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lbFoundDevices
@@ -56,27 +57,39 @@
             // lblInfo
             // 
             this.lblInfo.AutoSize = true;
-            this.lblInfo.Location = new System.Drawing.Point(25, 13);
+            this.lblInfo.Location = new System.Drawing.Point(86, 9);
             this.lblInfo.Name = "lblInfo";
-            this.lblInfo.Size = new System.Drawing.Size(323, 20);
+            this.lblInfo.Size = new System.Drawing.Size(228, 40);
             this.lblInfo.TabIndex = 2;
-            this.lblInfo.Text = "Select your device from the list and press OK";
+            this.lblInfo.Text = "Zoek uw apparaat en selecteer\r\nhet apparaatadres eronder";
+            this.lblInfo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnRefresh
             // 
-            this.btnRefresh.Location = new System.Drawing.Point(50, 352);
+            this.btnRefresh.Location = new System.Drawing.Point(19, 357);
             this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(43, 40);
+            this.btnRefresh.Size = new System.Drawing.Size(74, 31);
             this.btnRefresh.TabIndex = 3;
             this.btnRefresh.Text = "⟳";
             this.btnRefresh.UseVisualStyleBackColor = true;
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
+            // btn_back
+            // 
+            this.btn_back.Location = new System.Drawing.Point(309, 357);
+            this.btn_back.Name = "btn_back";
+            this.btn_back.Size = new System.Drawing.Size(75, 31);
+            this.btn_back.TabIndex = 4;
+            this.btn_back.Text = "Terug";
+            this.btn_back.UseVisualStyleBackColor = true;
+            this.btn_back.Click += new System.EventHandler(this.btn_back_Click);
             // 
             // ConnectForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(396, 438);
+            this.Controls.Add(this.btn_back);
             this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.lblInfo);
             this.Controls.Add(this.btnConfirm);
@@ -94,5 +107,6 @@
         private System.Windows.Forms.Button btnConfirm;
         private System.Windows.Forms.Label lblInfo;
         private System.Windows.Forms.Button btnRefresh;
+        private System.Windows.Forms.Button btn_back;
     }
 }

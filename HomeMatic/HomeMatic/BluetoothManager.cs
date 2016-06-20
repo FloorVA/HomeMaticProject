@@ -12,6 +12,7 @@ namespace HomeMatic
 {
     /// <summary>
     /// Bluetooth manager is static class so it can be accessed at all times. 
+    /// It's purpose is to connect to a device and be able to access it in every class.
     /// </summary>
     static class BluetoothManager
     {
@@ -26,7 +27,7 @@ namespace HomeMatic
          * 
    * Byte.MIN_VALUE SetLockState                boolean
          * -96      StartFirmwareUpdate         void
-         * -95      SendFirmawreData            byte[], int, int
+         * -95      SendFirmwareData            byte[], int, int
          * -16      FactoryReset                void
          * 0        SystemInformationRequest    void
          * 3        SetTime                     void
@@ -91,7 +92,7 @@ namespace HomeMatic
         }
 
         /// <summary>
-        /// return the current endpoint
+        /// return the current endpoint of the connection
         /// </summary>
         /// <returns>currentEndPoint</returns>
         public static BluetoothEndPoint getEndPoint()

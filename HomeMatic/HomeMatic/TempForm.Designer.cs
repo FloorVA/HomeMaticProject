@@ -28,31 +28,31 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lblCurrentTemp = new System.Windows.Forms.Label();
             this.btnLower = new System.Windows.Forms.Button();
             this.btnHigher = new System.Windows.Forms.Button();
             this.lblInfo = new System.Windows.Forms.Label();
             this.txtTempChange = new System.Windows.Forms.TextBox();
-            this.getInfoBtn = new System.Windows.Forms.Button();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.btn_back = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblCurrentTemp
             // 
             this.lblCurrentTemp.AutoSize = true;
-            this.lblCurrentTemp.Location = new System.Drawing.Point(148, 109);
-            this.lblCurrentTemp.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblCurrentTemp.Location = new System.Drawing.Point(222, 168);
             this.lblCurrentTemp.Name = "lblCurrentTemp";
-            this.lblCurrentTemp.Size = new System.Drawing.Size(28, 13);
+            this.lblCurrentTemp.Size = new System.Drawing.Size(40, 20);
             this.lblCurrentTemp.TabIndex = 0;
             this.lblCurrentTemp.Text = "21.0";
             this.lblCurrentTemp.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnLower
             // 
-            this.btnLower.Location = new System.Drawing.Point(197, 40);
-            this.btnLower.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnLower.Location = new System.Drawing.Point(296, 62);
             this.btnLower.Name = "btnLower";
-            this.btnLower.Size = new System.Drawing.Size(34, 34);
+            this.btnLower.Size = new System.Drawing.Size(51, 52);
             this.btnLower.TabIndex = 1;
             this.btnLower.Text = "-";
             this.btnLower.UseVisualStyleBackColor = true;
@@ -60,10 +60,9 @@
             // 
             // btnHigher
             // 
-            this.btnHigher.Location = new System.Drawing.Point(139, 40);
-            this.btnHigher.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnHigher.Location = new System.Drawing.Point(208, 62);
             this.btnHigher.Name = "btnHigher";
-            this.btnHigher.Size = new System.Drawing.Size(34, 34);
+            this.btnHigher.Size = new System.Drawing.Size(51, 52);
             this.btnHigher.TabIndex = 2;
             this.btnHigher.Text = "+";
             this.btnHigher.UseVisualStyleBackColor = true;
@@ -72,44 +71,46 @@
             // lblInfo
             // 
             this.lblInfo.AutoSize = true;
-            this.lblInfo.Location = new System.Drawing.Point(129, 185);
-            this.lblInfo.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblInfo.Location = new System.Drawing.Point(194, 285);
             this.lblInfo.Name = "lblInfo";
-            this.lblInfo.Size = new System.Drawing.Size(109, 13);
+            this.lblInfo.Size = new System.Drawing.Size(164, 20);
             this.lblInfo.TabIndex = 3;
             this.lblInfo.Text = "Press enter to confirm";
             // 
             // txtTempChange
             // 
-            this.txtTempChange.Location = new System.Drawing.Point(139, 159);
-            this.txtTempChange.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtTempChange.Location = new System.Drawing.Point(208, 245);
             this.txtTempChange.Name = "txtTempChange";
-            this.txtTempChange.Size = new System.Drawing.Size(85, 20);
+            this.txtTempChange.Size = new System.Drawing.Size(126, 26);
             this.txtTempChange.TabIndex = 4;
             this.txtTempChange.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtTempChange_KeyDown);
             // 
-            // getInfoBtn
+            // timer1
             // 
-            this.getInfoBtn.Location = new System.Drawing.Point(12, 12);
-            this.getInfoBtn.Name = "getInfoBtn";
-            this.getInfoBtn.Size = new System.Drawing.Size(96, 23);
-            this.getInfoBtn.TabIndex = 5;
-            this.getInfoBtn.Text = "Get Information";
-            this.getInfoBtn.UseVisualStyleBackColor = true;
-            this.getInfoBtn.Click += new System.EventHandler(this.getInfoBtn_Click);
+            this.timer1.Interval = 500;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // btn_back
+            // 
+            this.btn_back.Location = new System.Drawing.Point(29, 273);
+            this.btn_back.Name = "btn_back";
+            this.btn_back.Size = new System.Drawing.Size(75, 32);
+            this.btn_back.TabIndex = 5;
+            this.btn_back.Text = "Terug";
+            this.btn_back.UseVisualStyleBackColor = true;
+            this.btn_back.Click += new System.EventHandler(this.btn_back_Click);
             // 
             // TempForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(375, 222);
-            this.Controls.Add(this.getInfoBtn);
+            this.ClientSize = new System.Drawing.Size(562, 342);
+            this.Controls.Add(this.btn_back);
             this.Controls.Add(this.lblCurrentTemp);
             this.Controls.Add(this.txtTempChange);
             this.Controls.Add(this.lblInfo);
             this.Controls.Add(this.btnHigher);
             this.Controls.Add(this.btnLower);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "TempForm";
             this.Text = "TempForm";
             this.ResumeLayout(false);
@@ -124,6 +125,7 @@
         private System.Windows.Forms.Button btnHigher;
         private System.Windows.Forms.Label lblInfo;
         private System.Windows.Forms.TextBox txtTempChange;
-        private System.Windows.Forms.Button getInfoBtn;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Button btn_back;
     }
 }

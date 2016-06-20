@@ -63,31 +63,19 @@
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
     <Compile Include="BluetoothManager.cs" />
-    <Compile Include="PinForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PinForm.Designer.cs">
-      <DependentUpon>PinForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SetTemperatureCommand.cs" />
-    <Compile Include="SystemInformationRequestCommand.cs" />
     <Compile Include="TempForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="TempForm.Designer.cs">
       <DependentUpon>TempForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Testclass.cs" />
     <EmbeddedResource Include="ConnectForm.resx">
       <DependentUpon>ConnectForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PinForm.resx">
-      <DependentUpon>PinForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
