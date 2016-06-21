@@ -82,7 +82,7 @@ namespace HomeMatic
         /// </summary>
         private void btnHigher_Click(object sender, EventArgs e)
         {
-            currentTemp += 0.5;
+            currentTemp += 0.1;
             updateLabel();
         }
 
@@ -91,7 +91,7 @@ namespace HomeMatic
         /// </summary>
         private void btnLower_Click(object sender, EventArgs e)
         {
-            currentTemp -= 0.5;
+            currentTemp -= 0.1;
             updateLabel();
         }
 
